@@ -1,0 +1,2 @@
+This an acceptable version of Python, version 3.7.
+Numpy is installed, you are good to go here!
