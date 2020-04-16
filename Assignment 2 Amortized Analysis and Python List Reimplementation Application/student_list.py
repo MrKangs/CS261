@@ -56,8 +56,7 @@ class StudentList:
         self._removeRandomValue()
 
     def clear(self):
-        # This function will clear the list and return an empty array
-        
+        # This function will clear the list and return an empty array: basically resetting the array 
         self._size = 0
         new_List = np.empty([self._capacity], np.int16)
         self._list = new_List
@@ -67,18 +66,15 @@ class StudentList:
         # This function will count how many element is in the list
         return self._size
 
+    def get(self,index):
+        # This funcion will give the element value in that index position
+        return self._list[index]
 
     '''
     def pop(self):
         # FIXME
     
     def insert(self, index, val):
-        # FIXME
-    
-    def cout(self):
-        # FIXME
-    
-    def get(self,index):
         # FIXME
     
     '''
@@ -89,6 +85,7 @@ for i in range(4):
   print(student_list)
 
 print(student_list.count())
+print(student_list.get(1))
 
 student_list.remove(0)
 print(student_list)
@@ -99,5 +96,4 @@ print(student_list)
 for i in range(4):
   student_list.append(i)
   print(student_list)
-
 
