@@ -48,29 +48,16 @@ class StudentList:
 
     def remove(self, val):
         # This function will remove the element that is equal to val, not the position of it
-        
-        #FIXME: If the capacity is 4 ,8, 16, 32, ..., then it returns an error
 
-        for k in range(self._size):
+        for k in range(self._size - 1):
             if self._list[k] == val:
                 self._list = np.delete(self._list, k)
-                print(self._list)
         
         self._removeRandomValue()
 
     def clear(self):
         # This function will clear the list and return an empty array
-        
-        #FIXME: Both Methods are not working...
-
-        #for k in range(self._size):
-         #   self._list = np.delete(self._list, k)
-          #  self._removeRandomValue()
-           # print(self._list)
-
-        self._list = np.empty([self._capacity], np.int16)
-        for k in range (self._capacity):
-            self._removeRandomValue()
+        self._size = 0
 
     '''
     def pop(self):
@@ -88,12 +75,12 @@ class StudentList:
     '''
 student_list = StudentList()
 print(student_list)
-for i in range(8):
+for i in range(4):
   student_list.append(i)
   print(student_list)
 
-#student_list.remove(0)
-#print(student_list)
+student_list.remove(0)
+print(student_list)
 
 student_list.clear()
 print(student_list)
