@@ -57,7 +57,16 @@ class StudentList:
 
     def clear(self):
         # This function will clear the list and return an empty array
+        
         self._size = 0
+        new_List = np.empty([self._capacity], np.int16)
+        self._list = new_List
+
+
+    def count(self):
+        # This function will count how many element is in the list
+        return self._size
+
 
     '''
     def pop(self):
@@ -76,13 +85,19 @@ class StudentList:
 student_list = StudentList()
 print(student_list)
 for i in range(4):
-  student_list.append(i)
+  student_list.append(i* 50)
   print(student_list)
+
+print(student_list.count())
 
 student_list.remove(0)
 print(student_list)
 
 student_list.clear()
 print(student_list)
+
+for i in range(4):
+  student_list.append(i)
+  print(student_list)
 
 
