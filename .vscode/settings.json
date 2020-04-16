@@ -1,3 +1,13 @@
 {
-    "python.pythonPath": "/usr/bin/python3.7"
+    "python.pythonPath": "C:\\Users\\Kenneth Kang\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./Assignment 2 Amortized Analysis and Python List Reimplementation Application",
+        "-p",
+        "test*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": true
 }
