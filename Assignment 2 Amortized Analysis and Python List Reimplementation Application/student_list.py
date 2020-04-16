@@ -72,12 +72,13 @@ class StudentList:
     def pop(self):
         last_Element = self._list[self._size - 1]
         self._removeRandomValue()
+        self._size = self._size - 1
         return last_Element
-    '''
+
     def insert(self, index, val):
         # FIXME
     
-    '''
+
 student_list = StudentList()
 print(student_list)
 for i in range(4):
@@ -93,10 +94,13 @@ print(student_list)
 student_list.clear()
 print(student_list)
 
-for i in range(10000):
+for i in range(10):
   student_list.append(i)
   print(student_list)
 
-print(student_list.pop())
+student_list.pop()
+print(student_list)
+
+student_list.pop()
 print(student_list)
 
