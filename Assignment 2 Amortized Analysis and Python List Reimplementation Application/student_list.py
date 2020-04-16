@@ -70,7 +70,7 @@ class StudentList:
         return self._list[index]
 
     def pop(self):
-        last_Element = self._list[self._size]
+        last_Element = self._list[self._size - 1]
         self._removeRandomValue()
         return last_Element
     '''
@@ -93,7 +93,7 @@ print(student_list)
 student_list.clear()
 print(student_list)
 
-for i in range(4):
+for i in range(10000):
   student_list.append(i)
   print(student_list)
 
