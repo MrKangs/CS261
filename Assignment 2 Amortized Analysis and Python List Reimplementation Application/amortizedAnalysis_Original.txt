@@ -1,0 +1,31 @@
+Consider the push() operation for a Dynamic Array Stack. 
+In the best case, the operation is O(1). This corresponds to the case where there was room in the space we have already allocated for the array. 
+However, in the worst case, this operation slows down to O(n). 
+This corresponds to the case where the allocated space was full and we must copy each element of the array into a new (larger) array. 
+This problem is designed to discover runtime bounds on the average case when various array expansion strategies are used, 
+but first some information on how to perform an amortized analysis is necessary.
+
+Each time an item is added to the array without requiring reallocation, count 1 unit of cost. 
+This cost will cover the assignment which actually puts the item in the array.
+
+Each time an item is added and requires reallocation, count X + 1 units of cost, where X is the number of items currently in the array. 
+This cost will cover the X assignments which are necessary to copy the contents of the full array into a new (larger) array, 
+and the additional assignment to put the item which did not fit originally.
+
+To make this more concrete, if the array has 8 spaces and is holding 5 items, adding the sixth will cost 1. 
+However, if the array has 8 spaces and is holding 8 items, adding the ninth will cost 9 
+(8 to move the existing items + 1 to assign the ninth item once space is available).
+
+When we can bound an average cost of an operation in this fashion, but not bound the worst case execution time, 
+we call it amortized constant execution time, or average execution time. 
+Amortized constant execution time is often written as O(1)+, the plus sign indicating it is not a guaranteed execution time bound.
+
+In a file called amortizedAnalysis.txt , please provide answers to the following questions:
+
+How many cost units are spent in the entire process of performing 50 consecutive push operations on an empty array which starts out at capacity 8, 
+assuming that the array will double in capacity each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, 
+under this strategy for resizing, what is the average big-oh complexity for a push?
+
+How many cost units are spent in the entire process of performing 50 consecutive push operations on an empty array which starts out at capacity 8, 
+assuming that the array will grow by a constant 2 spaces each time a new item is added to an already full dynamic array? As N (ie. the number of pushes) grows large, 
+under this strategy for resizing, what is the average big-oh complexity for a push?
