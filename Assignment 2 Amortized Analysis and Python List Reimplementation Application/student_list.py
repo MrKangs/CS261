@@ -43,17 +43,23 @@ class StudentList:
 
         for k in range(self._size -1):
             new_List[k] = self._list[k]
-        
+
+        self._size = self._size - 1 
         self._list = new_List
 
     def remove(self, val):
         # This function will remove the element that is equal to val, not the position of it
 
+        i = 0
         for k in range(self._size - 1):
             if self._list[k] == val:
                 self._list = np.delete(self._list, k)
+                i += 1
         
-        self._removeRandomValue()
+        for j in range(i):
+            self._removeRandomValue()
+        
+       
 
     def clear(self):
         # This function will clear the list and return an empty array: basically resetting the array 
@@ -70,25 +76,34 @@ class StudentList:
         return self._list[index]
 
     def pop(self):
+        # This function will do the pop function, which take the last element value and remove it from the list
         last_Element = self._list[self._size - 1]
         self._removeRandomValue()
         self._size = self._size - 1
         return last_Element
 
     def insert(self, index, val):
-        # FIXME
-    
+        # This function will add an element in the index position of data of val
+        new_List = np.empty([self._size + 1], np.int16)
+        for k in range(self._size + 1):
+            new_List[k] = self._list[k]
+        new_List = np.insert(new_List,index,val)
+        self._size = self._size + 1 
+        self._list = new_List   
 
 student_list = StudentList()
 print(student_list)
-for i in range(4):
-  student_list.append(i* 50)
+for i in range(9):
+  student_list.append(i)
   print(student_list)
+
+student_list.append(0)
+student_list.append(1)
 
 print(student_list.count())
 print(student_list.get(1))
 
-student_list.remove(0)
+student_list.remove(1)
 print(student_list)
 
 student_list.clear()
@@ -102,5 +117,8 @@ student_list.pop()
 print(student_list)
 
 student_list.pop()
+print(student_list)
+
+student_list.insert(4,8)
 print(student_list)
 
