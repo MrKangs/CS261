@@ -76,46 +76,48 @@ class StudentList:
         # This function will do the pop function, which take the last element value and remove it from the list
         last_Element = self._list[self._size - 1]
         self._removeRandomValue()
-        self._size = self._size - 1
         return last_Element
 
     def insert(self, index, val):
         # This function will add an element in the index position of data of val
-        new_List = np.empty([self._size + 1], np.int16)
-        for k in range(self._size + 1):
-            new_List[k] = self._list[k]
-        new_List = np.insert(new_List, index, val)
+        if self._size == self._capacity:
+            self._upsize()
+        self._list = np.insert(self._list, index, val)
         self._size = self._size + 1
-        self._list = new_List
 
 
-student_list = StudentList()
-print(student_list)
-for i in range(900):
-    student_list.append(i)
-    print(student_list)
 
-student_list.append(0)
-student_list.append(1)
+#student_list = StudentList()
+#print(student_list)
+#for i in range(900):
+#    student_list.append(i)
+#    print(student_list)
 
-print(student_list.count())
-print(student_list.get(1))
+#student_list.append(0)
+#student_list.append(1)
 
-student_list.remove(1)
-print(student_list)
+#print(student_list.count())
+#print(student_list.get(1))
 
-student_list.clear()
-print(student_list)
+#student_list.remove(1)
+#print(student_list)
 
-for i in range(10000):
-    student_list.append(i)
-    print(student_list)
+#student_list.clear()
+#print(student_list)
 
-student_list.pop()
-print(student_list)
+#for i in range(10000):
+#    student_list.append(i)
+#    print(student_list)
 
-student_list.pop()
-print(student_list)
+#for i in range(5):
+#    student_list.append(i)
+#print(student_list)
+#student_list.pop()
+#print(student_list)
 
-student_list.insert(4, 8)
-print(student_list)
+#student_list.pop()
+#print(student_list)
+
+#student_list.insert(4, 8)
+#print(student_list)
+
