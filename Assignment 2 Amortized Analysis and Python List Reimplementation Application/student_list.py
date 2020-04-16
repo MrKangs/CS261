@@ -61,7 +61,6 @@ class StudentList:
         new_List = np.empty([self._capacity], np.int16)
         self._list = new_List
 
-
     def count(self):
         # This function will count how many element is in the list
         return self._size
@@ -70,10 +69,11 @@ class StudentList:
         # This funcion will give the element value in that index position
         return self._list[index]
 
-    '''
     def pop(self):
-        # FIXME
-    
+        last_Element = self._list[self._size]
+        self._removeRandomValue()
+        return last_Element
+    '''
     def insert(self, index, val):
         # FIXME
     
@@ -96,4 +96,7 @@ print(student_list)
 for i in range(4):
   student_list.append(i)
   print(student_list)
+
+print(student_list.pop())
+print(student_list)
 
