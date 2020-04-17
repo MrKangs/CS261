@@ -22,6 +22,7 @@ import sys
 # Checks whether the input string is balanced
 # param: input string
 # returns True if string is balanced, otherwise returns False
+
 def is_balanced(input_string):
 
     # initialize an empty list as the stack
