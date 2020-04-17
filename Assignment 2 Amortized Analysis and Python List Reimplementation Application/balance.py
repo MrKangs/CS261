@@ -10,13 +10,15 @@ import sys
 # param: input string
 # returns True if string is balanced, otherwise returns False
 
+# We need to set up as that with the correct order 
 beginning_list = ["[","{","("]
 ending_list = ["]","}",")"]
+
 def is_balanced(input_string):
+# This function will tell whether the parentheses is balanced or not 
 
     # initialize an empty list as the stack
     stack = []
-
 
     # iterate over each character in the string
     for i in input_string:
@@ -30,6 +32,14 @@ def is_balanced(input_string):
                 return False
     if len(stack) == 0:
         return True
+
+# Testing purpose 
+
+#string = "{{(])}}"
+#print("This " , string, " is ", is_balanced(string))
+
+#string = "({{[]}})({})"
+#print("This " , string, " is ", is_balanced(string))
 
 
 if __name__ == '__main__':
