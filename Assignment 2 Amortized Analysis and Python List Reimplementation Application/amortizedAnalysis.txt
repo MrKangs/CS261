@@ -1,0 +1,23 @@
+1. 
+The only time to take care is when we are pushing a unit on the 9th, 17th, and 33rd. 
+Those are the only units that the array need to resize itself.
+On the 9th time of pushing, we had to add all 8 data values and copy it,
+so the total cost units for that time will be 9.
+This idea applies to the 17th and the 33rd which will be 17 units and 33 units rather than 1.
+Since those are the only three units will be different than 1, the remaining will be 1's which
+there are total of 47 units. 
+So the cost units for 50 pushes with this strategy of resizing will be 47 + 9 + 17 + 33 = 106 units.
+
+To calculate the average big-o complexity for a push will be (total cost units/ times of pushes).
+Which the values will be 106/50 = 2.12 units per push.
+
+2.
+Compare to the last problem, this is more complex. Up to 8th is the same, but starting from 9th place
+is different. every odd number from 9th place will be added to the cost units because
+we are only resizing two more spaces which every odds need to resize the array size. 
+So the calculation will be 8 + (sum of every odd number from 9 to 50 (or 49)) + 21 = 688 units.
+The idea of getting 21 is every even number after 9th will be 1, and there is total of 21 numbers
+that are even which will be 21. 
+
+To calculate the average big-o complexity for a push will be the same idea from the previous problem.
+The average big-o complexity = 688/50 = 13.76 units per push.
