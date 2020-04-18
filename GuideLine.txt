@@ -1,4 +1,4 @@
-For set-up, go to Assignment 1 Environment setup
+For set-up, go to Assignment 1 Environment setup and go to Guide.py
 
 For learning purpose, go to Week 2 ~ 10, then select Guide.py file 
 and follow the directions.
