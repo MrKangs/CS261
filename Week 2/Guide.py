@@ -28,4 +28,6 @@ specified as a mathematical function.
 # Therefore, we need make sure we are using the shortest notation as possible to reduce the time
 # to complie the program. That is the main object from this lecture
 
+# To find more information about the Big-O notation, check the pdf file called, Big_O.pdf
+
 
