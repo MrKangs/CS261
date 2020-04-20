@@ -8,16 +8,29 @@ Since those are the only three units will be different than 1, the remaining wil
 there are total of 47 units. 
 So the cost units for 50 pushes with this strategy of resizing will be 47 + 9 + 17 + 33 = 106 units.
 
-To calculate the average big-o complexity for a push will be (total cost units/ times of pushes).
-Which the values will be 106/50 = 2.12 units per push.
+The average Big-oh complexity will follow this equation: 
+average Big-oh Complexity = (total cost of resizing in terms of N+ total cost of copying values in terms of N) / N
+
+Since total cost of copying values will be N while the resizing will be N -1 (because at the 9th term, 1 for pushing while 8 = 9-1 will be resizing),
+the equation and simplifying will be like the following: (N + (N - 1)) / N = (2N - 1) / N = 2 - (1/N) = 2 = O(1)+
+We drop the 1/N value because that is the only value smaller, which we want the worse yet average Big0oh complexity time. 
+Also, the + means that it is more than 1, but less than other functions like O(N) or O(log(N)). 
+Therefore the average Big-oh complexity time be O(1)+  
 
 2.
 Compare to the last problem, this is more complex. Up to 8th is the same, but starting from 9th place
 is different. every odd number from 9th place will be added to the cost units because
 we are only resizing two more spaces which every odds need to resize the array size. 
-So the calculation will be 8 + (sum of every odd number from 9 to 50 (or 49)) + 21 = 688 units.
+So the calculation will be 8 + (sum of every odd number from 9 to 50 (or 49)) + 21 = 638 units.
 The idea of getting 21 is every even number after 9th will be 1, and there is total of 21 numbers
-that are even which will be 21. 
+that are even which will be 21.
 
-To calculate the average big-o complexity for a push will be the same idea from the previous problem.
-The average big-o complexity = 688/50 = 13.76 units per push.
+To calculate the average Big-oh complexity applies the same idea from the previous problem. 
+The total of copying will be the same as previous problem: N
+The pattern of resizing follows something similar: 1 + 2 + 3 + ... + N = N(N+1)/2
+However, the pattern is that 9 + 11 + 13 + 15 + .. + last odd number before N or N.
+We get an equation like the following: N/2(2a - 2(N-1)) while a is the first term. In our case, a will be 9. 
+So the new equation will be N(9-(N-1)) for resizing.
+The equation and simplifying of the average Big-oh complexity = (N + N(9-(N-1))) / N = (9N - N^2)/ N = 9 - N = O(N)
+We drop the constant 9 from the equation, and the negative does not really matter, so the answer will be O(N).
+ 
