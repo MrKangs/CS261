@@ -157,7 +157,7 @@ class LinkedList:
             value: The value to look for
 
         Returns:
-            The integer index it is found at, False otherwise
+            True if value is in the list, False otherwise
         """
 
         # FIXME: Write this function
@@ -324,7 +324,7 @@ class CircularList:
             value: The value to look for
 
         Returns:
-            The integer index it is found at, False otherwise
+            True if value is in the list, False otherwise
         """
 
         # FIXME: Write this function
