@@ -5,7 +5,8 @@ from linked_list import CircularList
 if __name__ == '__main__':
 
 	list1 = LinkedList([1, 2, 3])
-	list1.add_back(4)
+	print(list1)
+	list1.add_back(5)
 	print(list1)
 	list1.remove_front()
 	print(list1)

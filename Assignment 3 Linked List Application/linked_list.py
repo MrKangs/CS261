@@ -102,6 +102,7 @@ class LinkedList:
         # FIXME: Complete this function
 
 
+
     def get_front(self):
         """
         Returns the data in the element at the front of the list. Will return
