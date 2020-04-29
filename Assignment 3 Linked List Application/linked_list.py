@@ -86,15 +86,25 @@ class LinkedList:
             Index: The index of the node that will be removed
         """
 
+        if self.head.next == self.tail:
+            return False
+
         cur = self.head
         prev = None
         if index < 0:
             return print("Exception: Index out of bounds!")
-        for i in range(index):
+        if index == 0:
+            self.remove_front()
+            return True
+        for i in range(index + 1):
             prev = cur          
             cur = cur.next
             if cur is None:
                 return print("Exception: Index out of bounds!")
+            if cur.next == self.tail:
+                self.remove_back()
+                return True
+
         prev.next = cur.next
       
 
