@@ -66,7 +66,18 @@ class LinkedList:
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        if index < 0:
+            return print("Exception: Index out of bounds!")
+
+        cur = self.head
+
+        for i in range(index):
+            cur = cur.next
+            if cur is None:
+                return print("Exception: Index out of bounds!")
+
+        new_link.next = cur.next
+        cur.next = new_link
 
     def remove_link(self, index):
         """
@@ -75,7 +86,17 @@ class LinkedList:
             Index: The index of the node that will be removed
         """
 
-        # FIXME: Write this function
+        cur = self.head
+        prev = None
+        if index < 0:
+            return print("Exception: Index out of bounds!")
+        for i in range(index):
+            prev = cur          
+            cur = cur.next
+            if cur is None:
+                return print("Exception: Index out of bounds!")
+        prev.next = cur.next
+      
 
     def add_front(self, data):
         """
@@ -87,7 +108,8 @@ class LinkedList:
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        new_link.next = self.head.next
+        self.head.next = new_link
 
     def add_back(self, data):
         """
@@ -98,9 +120,14 @@ class LinkedList:
         """
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
-
-        # FIXME: Complete this function
-
+        
+        cur = self.head
+        while(cur.next != self.tail):
+            cur = cur.next
+        
+        new_link.next = cur.next
+        cur.next = new_link
+        
 
 
     def get_front(self):
@@ -111,8 +138,10 @@ class LinkedList:
         Returns:
             The data in the node at index 0 or None if there is no such node
         """
+        if self.head.next == self.tail:
+            return "No element in the list!"
 
-        # FIXME: Write this function
+        return self.head.next.data
 
     def get_back(self):
         """
@@ -122,23 +151,41 @@ class LinkedList:
         Returns:
             The data in the node at last index of the list or None if there is no such node
         """
+        if self.head.next == self.tail:
+            return "No element in the list!"
 
-        # FIXME: Write this function
+        cur = self.head
+        while(cur.next != self.tail):
+            cur = cur.next
+        
+        return cur.data
 
     def remove_front(self):
         """
         Removes the first element of the list. Will not remove the tail.
         """
-
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return False
+        cur = self.head
+        for i in range(1):
+            cur = cur.next
+        self.head = cur
 
     def remove_back(self):
         """
         Removes the last element of the list. Will not remove the head.
         """
 
-        # FIXME: Write this function
-
+        if self.head.next == self.tail:
+            return False       
+        else:
+            cur = self.head
+            prev = None
+            while(cur.next.next is not None):
+                prev = cur
+                cur = cur.next
+            cur = prev
+            prev.next = self.tail
 
     def is_empty(self):
         """
@@ -148,7 +195,10 @@ class LinkedList:
             True if the list has no data nodes, False otherwise
         """
 
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return True
+        else:
+            return False
 
     def contains(self, value):
         """
@@ -161,7 +211,18 @@ class LinkedList:
             True if value is in the list, False otherwise
         """
 
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return "No element in the list!"
+
+        cur = self.head
+
+        while(cur.next != self.tail):
+            if cur.data == value:
+                return True
+            cur = cur.next
+        
+        return False
+        
 
     def remove(self, value):
         """
@@ -171,7 +232,19 @@ class LinkedList:
             value: the value to remove
         """
 
-        # FIXME: Write this function
+        prev = None
+        cur = self.head
+        while cur:
+            if cur.data == value:
+                if prev:
+                    prev.next = cur.next
+                else:
+                    self.head = cur.next
+                return True
+
+            prev = cur
+            cur = cur.next
+        return False
 
 
 '''
