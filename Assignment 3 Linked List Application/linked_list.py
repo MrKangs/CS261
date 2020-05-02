@@ -67,14 +67,14 @@ class LinkedList:
         new_link.data = data  # set new_link data
 
         if index < 0:
-            return print("Exception: Index out of bounds!")
+            return print("Exception: Index out of bounds! The bound is too low!")
 
         cur = self.head
 
         for i in range(index):
             cur = cur.next
             if cur is None:
-                return print("Exception: Index out of bounds!")
+                return print("Exception: Index out of bounds! The bound is too high!")
 
         new_link.next = cur.next
         cur.next = new_link
@@ -92,7 +92,7 @@ class LinkedList:
         cur = self.head
         prev = None
         if index < 0:
-            return print("Exception: Index out of bounds!")
+            return print("Exception: Index out of bounds! The bound is too low!")
         if index == 0:
             self.remove_front()
             return True
@@ -100,7 +100,7 @@ class LinkedList:
             prev = cur          
             cur = cur.next
             if cur is None:
-                return print("Exception: Index out of bounds!")
+                return print("Exception: Index out of bounds! The bound is too high!")
             if cur.next == self.tail:
                 self.remove_back()
                 return True
@@ -317,12 +317,12 @@ class CircularList:
         new_link.data = data  # set new_link data
 
         if index < 0:
-            return print("Exception: Index out of bounds!") 
+            return print("Exception: Index out of bounds! The bound is too low!") 
         cur = self.sentinel
         for i in range (index):
             cur = cur.next
             if cur == self.sentinel:
-                return print("Exception: Index out of bounds!")
+                return print("Exception: Index out of bounds! The bound is too high!")
         
         new_link.next = cur.next
         new_link.prev = cur
@@ -338,14 +338,14 @@ class CircularList:
         """
 
         if index < 0:
-            return print("Exception: Index out of bounds!")        
+            return print("Exception: Index out of bounds! The bound is too low!")        
         
         cur = self.sentinel
 
         for i in range (index):
             cur = cur.next
             if cur == self.sentinel:
-                return print("Exception: Index out of bounds!")
+                return print("Exception: Index out of bounds! The bound is too high!")
 
         cur.next.prev = cur.prev
         cur.prev.next = cur.next
