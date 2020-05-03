@@ -22,6 +22,7 @@ specified as a mathematical function.
 # O(n^3)
 # O(2^n)
 # O(n!)
+# These example code can be found in BigO_type folder
 
 # This time to run the code is important when we talk about bigger data values: 
 # it will take ages if we run the code with a lot data
