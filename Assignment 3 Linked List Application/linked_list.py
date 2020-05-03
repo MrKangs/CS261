@@ -1,10 +1,12 @@
 # linked_list.py
-# ===================================================
+# ===============================================================================================
 # Linked list exploration
 # Part 1: implement the deque and bag ADT with a Linked List
 # Part 2: implement the deque ADT with a CircularlyDoubly-
 # Linked List
-# ===================================================
+# Created by Kenneth Kang, 5-1-2020
+# The best way to understand how the function works, draw them out and do before and after of them
+# =================================================================================================
 
 
 '''
@@ -86,16 +88,14 @@ class LinkedList:
             Index: The index of the node that will be removed
         """
 
-        if self.head.next == self.tail:
-            return False
+        if self.is_empty() == True:
+            return print("No element in the list!")
 
         cur = self.head
         prev = None
         if index < 0:
             return print("Exception: Index out of bounds! The bound is too low!")
-        if index == 0:
-            self.remove_front()
-            return True
+
         for i in range(index + 1):
             prev = cur          
             cur = cur.next
@@ -148,7 +148,7 @@ class LinkedList:
         Returns:
             The data in the node at index 0 or None if there is no such node
         """
-        if self.head.next == self.tail:
+        if self.is_empty() == True:
             return "No element in the list!"
 
         return self.head.next.data
@@ -161,7 +161,7 @@ class LinkedList:
         Returns:
             The data in the node at last index of the list or None if there is no such node
         """
-        if self.head.next == self.tail:
+        if self.is_empty() == True:
             return "No element in the list!"
 
         cur = self.head
@@ -174,7 +174,7 @@ class LinkedList:
         """
         Removes the first element of the list. Will not remove the tail.
         """
-        if self.head.next == self.tail:
+        if self.is_empty() == True:
             return False
         cur = self.head
         for i in range(1):
@@ -186,7 +186,7 @@ class LinkedList:
         Removes the last element of the list. Will not remove the head.
         """
 
-        if self.head.next == self.tail:
+        if self.is_empty() == True:
             return False       
         else:
             cur = self.head
@@ -207,8 +207,7 @@ class LinkedList:
 
         if self.head.next == self.tail:
             return True
-        else:
-            return False
+        return False
 
     def contains(self, value):
         """
@@ -221,7 +220,7 @@ class LinkedList:
             True if value is in the list, False otherwise
         """
 
-        if self.head.next == self.tail:
+        if self.is_empty() == True:
             return "No element in the list!"
 
         cur = self.head
@@ -241,6 +240,8 @@ class LinkedList:
         Args:
             value: the value to remove
         """
+        if self.is_empty() == True:
+            return print("No element in the list!")
 
         prev = None
         cur = self.head
@@ -338,21 +339,20 @@ class CircularList:
         """
 
         if index < 0:
-            return print("Exception: Index out of bounds! The bound is too low!")        
+            return print("Exception: Index out of bounds! The bound is too low!")
+
+        if self.is_empty() == True:
+            return print("No element in the list!")    
         
         cur = self.sentinel
 
-        for i in range (index):
+        for i in range (index + 1):
             cur = cur.next
             if cur == self.sentinel:
                 return print("Exception: Index out of bounds! The bound is too high!")
 
         cur.next.prev = cur.prev
         cur.prev.next = cur.next
-        print("Did it work?")
-        # FIXME: It is not working somehow....
-
-
 
     def add_front(self, data):
         """
@@ -385,7 +385,7 @@ class CircularList:
         cur = self.sentinel
 
         cur.prev.next = new_link
-        new_link.prev = cur.prev.next
+        new_link.prev = cur.prev
         new_link.next = cur
         cur.prev = new_link
 
@@ -400,7 +400,7 @@ class CircularList:
             The data in the node at index 0 or None if there is no such node
         """
 
-        if self.sentinel.next.data is None:
+        if self.is_empty() == True:
             return "No element in the list!"
 
         return self.sentinel.next.data
@@ -415,7 +415,7 @@ class CircularList:
             The data in the node at last index of the list or None if there is no such node
         """
 
-        if self.sentinel.prev.data is None:
+        if self.is_empty() == True:
             return "No element in the list!"
 
         return self.sentinel.prev.data
@@ -426,15 +426,25 @@ class CircularList:
         Removes the first element of the list. Will not remove the tail.
         """
 
-        # FIXME: Write this function
+        if self.is_empty() == True:
+            return print("No element in the list!")
 
-
+        cur = self.sentinel
+        cur.next = cur.next.next
+        cur.next.prev = cur
+        
     def remove_back(self):
         """
         Removes the last element of the list. Will not remove the head.
         """
 
-        # FIXME: Write this function
+        if self.is_empty() == True:
+            return print("No element in the list!")
+
+        cur = self.sentinel
+        cur.prev = cur.prev.prev
+        cur.prev.next = cur
+        
 
     def is_empty(self):
         """
@@ -444,7 +454,9 @@ class CircularList:
             True if the list has no data nodes, False otherwise
         """
 
-        return self.sentinel.next == self.sentinel.prev is None
+        if self.sentinel.next == self.sentinel:
+            return True
+        return False
 
 
     def contains(self, value):
@@ -458,17 +470,17 @@ class CircularList:
             True if value is in the list, False otherwise
         """
 
-        if self.sentinel.next == self.sentinel.prev:
+        if self.is_empty() == True:
             return "No element in the list!"
         
-        cur = self.sentinel
+        cur = self.sentinel.next
 
-        while (cur.next != cur.prev != None):
-            cur = cur.next
+        while (cur != self.sentinel):
             if cur.data == value:
                 return True
-            if cur == self.sentinel:
-                return False
+            cur = cur.next
+
+        return False
 
     def remove(self, value):
         """
@@ -478,7 +490,19 @@ class CircularList:
             value: the value to remove
         """
 
-        # FIXME: Write this function
+        if self.is_empty() == True:
+            return "No element in the list!"
+        
+        cur = self.sentinel.next
+        index = 0
+
+        while (cur != self.sentinel):
+            if cur.data == value:
+                self.remove_link(index)
+            cur = cur.next
+            index +=1
+
+        return False
 
     def circularListReverse(self):
         """
@@ -486,6 +510,27 @@ class CircularList:
         (e.g. you cannot call DLNode()). If the list printed by following next was 0, 1, 2, 3,
         after the call it will be 3,2,1,0
         """
+        if self.is_empty() == True:
+            return print("No element in the list!")
 
-        # FIXME: Write this function
+        cur = self.sentinel.next
+        temp = None
+
+        while(cur.data is not None):
+            temp = cur.prev
+            cur.prev = cur.next
+            cur.next = temp
+            cur = cur.prev
+
+        temp1 = self.sentinel.next
+        temp2 = self.sentinel.prev
+        self.sentinel.prev = temp1
+        self.sentinel.next = temp2
+
+        
+
+
+
+
+        
 
