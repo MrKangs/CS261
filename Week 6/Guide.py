@@ -22,7 +22,7 @@
 
 11. Look at Finding Part 1 ~ 2.png (In Finding folder)
 12. Look at Inserting Part 1 ~ 2.png (In Insert folder)
-13. Look at Removing Part 1 ~ 2.png (In Remove folder)
+13. Look at Removing Part 1 ~ 2.png with the video (In Remove folder)
 14. Look at Runtime Complexity of BST Operations.png (In Binary Search Tree Operation folder)
 
 # Homework #
