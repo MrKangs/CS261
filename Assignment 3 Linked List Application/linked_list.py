@@ -225,7 +225,7 @@ class LinkedList:
 
         cur = self.head
 
-        while(cur.next != self.tail):
+        while(cur != self.tail):
             if cur.data == value:
                 return True
             cur = cur.next

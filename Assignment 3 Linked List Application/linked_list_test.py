@@ -3,6 +3,7 @@ from linked_list import CircularList
 
 if __name__ == '__main__':
 
+
 	list1 = LinkedList([1,2,3,4,5])
 	list2 = CircularList([4,5,6])
 	# This place is a tester for the code for linked_list.py
@@ -15,7 +16,5 @@ if __name__ == '__main__':
 	print(list2)
 	list2.circularListReverse()
 	print(list2)
-
-
 
 
