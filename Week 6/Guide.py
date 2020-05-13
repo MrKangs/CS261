@@ -27,9 +27,8 @@
 
 # Homework #
 
-15.
-16.
-17.
+15. Look at bst_original.py and try to code it (In Assignment 4 Binary Search Trees)
+Solution will be bst.py while testing will be using bst_test.py
 
 
 
