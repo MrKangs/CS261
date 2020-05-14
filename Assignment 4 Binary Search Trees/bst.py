@@ -179,33 +179,27 @@ class BST:
             True if kq is in the tree, otherwise False
         """
 
-        if self.root.val == kq:
-            return True
-
-        if self.root.val is None:
-            return False
-
-        if self.root.right is None and self.root.left is None:
-            return False
-
-        else:
-            currentRoot = self.root
-            while (currentRoot.left is not None or currentRoot.right is not None):
-                if currentRoot.val == kq:
-                    return True
-                
-                if currentRoot.val > kq:
-                    currentRoot = currentRoot.left
-                    continue
-
-                if currentRoot.val < kq:
-                    currentRoot = currentRoot.right
-                    continue
-
+        currentRoot = self.root
+        while (currentRoot.left is not None or currentRoot.right is not None):
             if currentRoot.val == kq:
                 return True
-            else: 
-                return False
+                
+            if currentRoot.val > kq:
+                currentRoot = currentRoot.left
+                if currentRoot is None:
+                    return False
+                continue
+
+            if currentRoot.val < kq:
+                currentRoot = currentRoot.right
+                if currentRoot is None:
+                    return False
+                continue
+
+        if currentRoot.val == kq:
+            return True
+        else: 
+            return False
      
 
     def leftChild(self, node):
