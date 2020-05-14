@@ -137,7 +137,17 @@ class BST:
         Returns:
             A list of nodes in the specified ordering
         """
-        # FIXME: Write this function
+        if visited is None:
+            visited = []
+            self.pre_order_traversal(self.root, visited)
+        
+        if cur_node is None:
+            return visited
+        
+        visited.append(cur_node.val)
+        self.pre_order_traversal(cur_node.left,visited)
+        self.pre_order_traversal(cur_node.right,visited)
+        return visited
 
     def post_order_traversal(self, cur_node=None, visited=None) -> []:
         """
@@ -146,7 +156,17 @@ class BST:
         Returns:
             A list of nodes in the specified ordering
         """
-        # FIXME: Write this function
+        if visited is None:
+            visited = []
+            self.post_order_traversal(self.root, visited)
+        
+        if cur_node is None:
+            return visited
+        
+        self.post_order_traversal(cur_node.left, visited)
+        self.post_order_traversal(cur_node.right, visited)
+        visited.append(cur_node.val)
+        return visited
 
     def contains(self, kq):
         """
@@ -169,43 +189,23 @@ class BST:
             return False
 
         else:
-            if self.root.val > kq:
-                if self.containsRoot(self.root.left, kq) == True:
+            currentRoot = self.root
+            while (currentRoot.left is not None or currentRoot.right is not None):
+                if currentRoot.val == kq:
                     return True
-                else: 
-                    return False
-            else:
-                if self.containsRoot(self.root.right, kq) == True:
-                    return True
-                else:
-                    return False    
-    
-    def containsRoot(self, currentRoot, kq):
-        """
-        Searches BSTree to determine if the query key (kq) is in the BSTree.
-        Compare to the contains function, this one will after the mainRoot of the tree
-        Therefore, we take a new argument of currentRoot.
-        If the kq value is smaller than self.root.val, then currentRoot will be self.root.left
-        Else it will be self.root.right
-        This function is a helper function to help the contains function
+                
+                if currentRoot.val > kq:
+                    currentRoot = currentRoot.left
+                    continue
 
-        Args:
-            currentRoot: self.root.(either left or right depends on kq value)
-            kq: query key
+                if currentRoot.val < kq:
+                    currentRoot = currentRoot.right
+                    continue
 
-        Returns:
-            True if kq is in the tree, otherwise False
-        """
-        if currentRoot.val > kq:
-            if currentRoot.left is None:
+            if currentRoot.val == kq:
+                return True
+            else: 
                 return False
-            self.containsRoot(currentRoot.left, kq)
-        if currentRoot.val < kq:
-            if currentRoot.right is None:
-                return False
-            self.containsRoot(currentRoot.right, kq)
-        if currentRoot.val == kq:
-            return True
      
 
     def leftChild(self, node):
@@ -218,12 +218,32 @@ class BST:
         Returns:
             The left-most node of the given subtree
         """
-        while(self.root.left is not None):
-            self.root = self.root.left
-        
-        return self.root.val
+        if self.root.val == node:
+            leftNode = self.root.left
+            while(leftNode.left is not None):
+                leftNode = leftNode.left
+            return leftNode
 
-        #FIXME: I am not sure if I am doing it right: do I need to use node value? 
+        if self.root is None:
+            return None
+            
+        if self.root.left is None:
+            return None
+        
+        else:
+            root = self.root
+            while (root.left.val is not None):
+                if root.val == node:
+                    leftNode = root.left
+                    while(leftNode.left is not None):
+                        leftNode = leftNode.left
+                    return leftNode
+                elif root.val > node:
+                    root = root.left
+                else:
+                    root = root.right
+            return leftNode
+    #FIXME: Not working somehow... Need TA help
 
 
     def remove(self, kq):
