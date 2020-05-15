@@ -11,22 +11,22 @@ class Student:
         self.name = name
 
     def __lt__(self, kq): #Less than
-        return ((self.grade) < (kq.grade))
+        return ((self.grade) < (kq))
     
     def __le__(self, kq): #Less than or Eqaul to
-        return ((self.grade) <= (kq.grade))
+        return ((self.grade) <= (kq))
 
     def __gt__(self, kq): #Greater than
-        return ((self.grade) > (kq.grade))
+        return ((self.grade) > (kq))
     
     def __ge__(self, kq): #Greater than or Equal to
-        return ((self.grade) >= (kq.grade))
+        return ((self.grade) >= (kq))
 
     def __eq__(self, kq): #Equal to 
-        return ((self.grade) == (kq.grade))
+        return ((self.grade) == (kq))
     
     def __ne__(self, kq): #Not Equal to
-        return ((self.grade) != (kq.grade))
+        return ((self.grade) != (kq))
 
     def __str__(self): #Return as String value
         if self.grade is not None:
@@ -202,7 +202,7 @@ class BST:
             return False
      
 
-    def leftChild(self, node):
+    def left_child(self, node):
         """
         Returns the left-most child in a subtree.
 
@@ -212,33 +212,22 @@ class BST:
         Returns:
             The left-most node of the given subtree
         """
-        if self.root.val == node:
-            leftNode = self.root.left
-            while(leftNode.left is not None):
-                leftNode = leftNode.left
-            return leftNode
 
-        if self.root is None:
-            return None
-            
-        if self.root.left is None:
-            return None
-        
-        else:
-            root = self.root
-            while (root.left.val is not None):
-                if root.val == node:
-                    leftNode = root.left
-                    while(leftNode.left is not None):
-                        leftNode = leftNode.left
-                    return leftNode
-                elif root.val > node:
-                    root = root.left
-                else:
-                    root = root.right
-            return leftNode
-    #FIXME: Not working somehow... Need TA help
+        currentRoot = self.root
 
+        while(currentRoot is not None):
+            if currentRoot.val == node:
+                while(currentRoot.left is not None):
+                    currentRoot = currentRoot.left
+                return currentRoot
+
+            if currentRoot.val > node:
+                currentRoot = currentRoot.left
+                continue
+
+            if currentRoot.val < node:
+                currentRoot = currentRoot.right
+                continue
 
     def remove(self, kq):
         """
@@ -251,7 +240,7 @@ class BST:
         Returns:
             True if k is in the tree and successfully removed, otherwise False
         """
-        # FIXME: Write this function
+        #FIXME: FIXME Please!
 
     def get_first(self):
         """
@@ -269,4 +258,40 @@ class BST:
         Returns:
             True if the root was removed, otherwise False
         """
-        # FIXME: Write this function
+        currentRoot = self.root
+
+        newRootVal = self.leftChild(currentRoot.right.val)
+
+        newRoot = TreeNode(None)
+
+        newRoot.right = currentRoot.right
+        newRoot.left = currentRoot.left
+        newRoot.val = newRootVal
+
+        self.root = newRoot
+
+        #FIXME: Up to here works, but not below... Alomost
+
+        newRoot = newRoot.right
+
+        while(newRoot.left is not None):
+            newRoot = newRoot.left
+        
+        if newRoot.left is None:
+            if newRoot.right is not None:
+                newRoot =  newRoot.right
+                newRoot.right is None
+            
+            else:
+                newRoot is None
+
+            return True
+
+        else:
+            return False
+
+
+
+
+
+
