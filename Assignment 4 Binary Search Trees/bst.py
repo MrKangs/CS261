@@ -1,9 +1,11 @@
 # bst.py
 # ===================================================
+# Name: Kenneth Kang
+# Date: 5-18-2020
 # Implement a binary search tree that can store any
 # arbitrary object in the tree.
 # ===================================================
-# https://docs.python.org/3/reference/datamodel.html#object.__lt__
+
 
 class Student:
     def __init__(self, number, name):
@@ -213,21 +215,9 @@ class BST:
             The left-most node of the given subtree
         """
 
-        currentRoot = self.root
-
-        while(currentRoot is not None):
-            if currentRoot.val == node:
-                while(currentRoot.left is not None):
-                    currentRoot = currentRoot.left
-                return currentRoot
-
-            if currentRoot.val > node:
-                currentRoot = currentRoot.left
-                continue
-
-            if currentRoot.val < node:
-                currentRoot = currentRoot.right
-                continue
+        while(node.left is not None):
+            node = node.left
+        return node 
 
     def remove(self, kq):
         """
@@ -239,8 +229,150 @@ class BST:
 
         Returns:
             True if k is in the tree and successfully removed, otherwise False
-        """
-        #FIXME: FIXME Please!
+        """   
+        # Setting up variable 
+        currentRoot = self.root
+
+        # Setting up removeRoot history
+        previousLeft = None
+        previousRight = None
+
+        # Setting up indicator
+        i = 0
+        j = 0
+
+        # If the kq is the node value, then call the remove_first()
+        if self.root.val == kq:
+            return self.remove_first()
+
+        while(currentRoot is not None):
+            # If there is noting, then noting to remove, which is false
+            if currentRoot is None:
+                return False
+            
+            # If left and right is None, then there is noting to check, which is a false to remove
+            if currentRoot.right is None and currentRoot.left is None:
+                return False
+
+            # If the currentRoot.right is None, then set up a new tree that is nothing inside. Line 267 will tell you why
+            if currentRoot.right is None:
+                currentRoot.right = TreeNode(None)
+                i += 1
+
+            # If the currentRoot.left is None, then set up a new tree that is noting inside. Lime 267 will tell you why
+            if currentRoot.left is None:
+                currentRoot.left = TreeNode(None)
+                j += 1
+            
+            # If the currentRoot.right.val or currentRoot.left.val is equal to kq, then we start the removing process
+            # The reason why we do with currentRoot.right.val and currentRoot.left.val is we need to know the history connection to replace the new one
+            # It doesn't work when currentRoot.right and currentRoot.left is not a tree, so there is two functions to trick that there is a value in the tree, which is None
+            if currentRoot.right.val == kq or currentRoot.left.val == kq:
+                
+                # If you find the kq value from the right, we only need to know the rightSubTrees
+                if currentRoot.right.val == kq:
+                    previousRight = currentRoot
+                    # If we used the trick the tree, remove it as None so that it won't harm the tree data value
+                    if j == 1:
+                        currentRoot.left = None
+                        j = 0
+                    currentRoot = currentRoot.right
+                
+                # Same idea expect only on the left side
+                else:
+                    previousLeft = currentRoot
+                    # Same idea of the trick 
+                    if i == 1:
+                        currentRoot.right = None
+                        i = 0
+                    currentRoot = currentRoot.left
+                
+                # End of leaf value
+                if currentRoot.right is None and currentRoot.left is None:
+                    currentRoot = None
+
+                    if previousRight is not None:
+                        previousRight.right = None
+
+                    else:
+                        previousLeft.left = None
+
+                # Only have left child only
+                elif currentRoot.right is None:
+                    currentRoot = currentRoot.left
+                    previousLeft.left = currentRoot
+                    
+
+                # Only have right child only
+                elif currentRoot.left is None:
+                    currentRoot = currentRoot.right
+                    previousRight.right = currentRoot
+                    
+                
+                # Both have right and left, but only in one depth
+                elif currentRoot.right.left is None:
+                    newRoot = currentRoot.right
+                    newRoot.left = currentRoot.left
+
+                    if previousRight is not None:
+                        previousRight.right = newRoot
+
+                    else:
+                        previousLeft.left = newRoot
+                    
+                
+                # Both have right and left, and more than one depth
+                else:
+                    previousRemoveRootLeft = currentRoot.left
+                    previousRemoveRootRight = currentRoot.right
+                    
+                    currentRoot = currentRoot.right
+
+                    newRoot = self.left_child(currentRoot)
+
+                    while(currentRoot.left.val != newRoot.val):
+                        currentRoot = currentRoot.left
+                    
+                    if newRoot.right is not None:
+                        currentRoot.left = newRoot.right
+
+                    else:
+                        currentRoot.left = None
+
+                    newRoot.right = previousRemoveRootRight
+                    newRoot.left = previousRemoveRootLeft
+                    
+                    if previousRight is not None:
+                        previousRight.right = newRoot
+
+                    else:
+                        previousLeft.left = newRoot                                        
+                
+                return True
+
+            # This case is when we trick the value and yet we are not using the left side, then we reset it back to is original
+            if i == 1:
+                currentRoot.right = None
+                i = 0
+
+            # Same idea with the above if statement
+            if j == 1:
+                currentRoot.left = None
+                j = 0
+            
+            # Next two if statements are the binary search 
+            if currentRoot.val > kq:
+                currentRoot = currentRoot.left
+                continue
+
+            if currentRoot.val < kq:
+                currentRoot = currentRoot.right
+                continue
+
+            # If all of them fails, then it is also false
+            else:
+                return False
+
 
     def get_first(self):
         """
@@ -258,37 +390,56 @@ class BST:
         Returns:
             True if the root was removed, otherwise False
         """
-        currentRoot = self.root
-
-        newRootVal = self.leftChild(currentRoot.right.val)
-
-        newRoot = TreeNode(None)
-
-        newRoot.right = currentRoot.right
-        newRoot.left = currentRoot.left
-        newRoot.val = newRootVal
-
-        self.root = newRoot
-
-        #FIXME: Up to here works, but not below... Alomost
-
-        newRoot = newRoot.right
-
-        while(newRoot.left is not None):
-            newRoot = newRoot.left
+        # If there is nothing, it will return False
+        if self.root is None:
+            return False
+               
+        # When there is only the main root
+        if self.root.right is None and self.root.left is None:
+            self.root = None
+            return True
         
-        if newRoot.left is None:
-            if newRoot.right is not None:
-                newRoot =  newRoot.right
-                newRoot.right is None
+        # Only the self.root.right exists
+        elif self.root.left is None:
+            self.root = self.root.right
+            return True
+        
+        # Only the self.root.left exists
+        elif self.root.right is None:
+            self.root = self.root.left
+            return True
+        
+        # When both self.root.right and self.root.left exists, but only in one depth for each 
+        elif self.root.right.left is None:
+            newRoot = self.root.right
+            newRoot.left = self.root.left
+            self.root = newRoot
+            return True
+        
+        # When both self.root.right and self.root.left exists, and have more than one depth 
+        else:
+            currentRoot = self.root
+            previousLeft = currentRoot.left
+            previousRight = currentRoot.right
+
+            currentRoot = currentRoot.right
+            newRoot = self.left_child(currentRoot)
+
+            while(currentRoot.left.val != newRoot.val):
+                currentRoot = currentRoot.left
             
+            if newRoot.right is not None:
+                currentRoot.left = newRoot.right
+
             else:
-                newRoot is None
+                currentRoot.left = None
+
+            newRoot.right = previousRight
+            newRoot.left = previousLeft
+            
+            self.root = newRoot
 
             return True
-
-        else:
-            return False
 
 
 
