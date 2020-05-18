@@ -46,7 +46,7 @@ class TreeNode:
 class BST:
     def __init__(self, start_tree=None) -> None:
         """ Initialize empty tree """
-        self.root = TreeNode(None)
+        self.root = None
 
         # populate tree with initial nodes (if provided)
         if start_tree is not None:
@@ -70,7 +70,7 @@ class BST:
             val: Item to be stored in the new node
         """
 
-        if self.root.val is None:
+        if self.root is None:
             self.root = TreeNode(val)
         else:
             if self.root.val <= val:
