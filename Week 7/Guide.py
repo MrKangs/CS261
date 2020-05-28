@@ -3,7 +3,7 @@
 
 1. Look at Limitation of Balancing Trees part 1 ~ 2.png (In Balance with Binary Trees folder)
 2. Look at Balance Part 1 ~ 2.png (In Balance with Binary Trees folder)
-3. Look at this video: https://www.youtube.com/watch?v=LU4fGD-fgJQ&t=165s
+3. Look at this video: https://www.youtube.com/watch?v=LU4fGD-fgJQ&t
 
 # AVL Trees#
 
