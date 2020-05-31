@@ -1,0 +1,80 @@
+reachable: {}
+stack: [PDX]
+
+
+v: PDX
+successors: [SEA, SFO]
+reachable: {PDX}
+stack: [SEA, SFO]
+
+
+v: SFO
+successors: [ORD, PDX]
+reachable: {PDX, SFO}
+stack: [SEA, ORD, PDX]
+
+
+v: PDX (already reachable)
+successors: --
+reachable: {PDX, SFO}
+stack: [SEA, ORD]
+
+
+v: ORD
+successors: [MSP, STL]
+reachable: {ORD, PDX, SFO}
+stack: [SEA, MSP, STL]
+
+
+v: STL
+successors: [LAX, ORD]
+reachable: {ORD, PDX, SFO, STL}
+stack: [SEA, MSP, LAX, ORD]
+
+
+v: ORD (already reachable)
+successors: --
+reachable: {ORD, PDX, SFO, STL}
+stack: [SEA, MSP, LAX]
+
+
+v: LAX
+successors: [ORD, SFO]
+reachable: {LAX, ORD, PDX, SFO, STL}
+stack: [SEA, MSP, ORD, SFO]
+
+
+v: SFO, ORD (both already reachable)
+successors: --
+reachable: {LAX, ORD, PDX, SFO, STL}
+stack: [SEA, MSP]
+
+
+v: MSP
+successors: [PDX, SFO]
+reachable: {LAX, MSP, ORD, PDX, SFO, STL}
+stack: [SEA, PDX, SFO]
+
+
+v: SFO, PDX (both already reachable)
+successors: --
+reachable: {LAX, MSP, ORD, PDX, SFO, STL}
+stack: [SEA]
+
+
+
+
+v: SEA
+successors: MSP, PDX
+reachable: {LAX, MSP, ORD, PDX, SEA, SFO, STL}
+stack: [MSP, PDX]
+
+
+v: PDX, MSP (both already reachable)
+Successors: --
+reachable: {LAX, MSP, ORD, PDX, SEA, SFO, STL}
+stack: []
+
+
+Done (stack empty)
+reachable: {LAX, MSP, ORD, PDX, SEA, SFO, STL}
