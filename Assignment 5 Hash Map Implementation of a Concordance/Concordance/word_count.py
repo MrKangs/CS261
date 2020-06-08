@@ -4,6 +4,8 @@
 # occurrences of all the words in a file. The word
 # counter will return the top X words, as indicated
 # by the user.
+# Name: Kenneth Kang
+# Date: 6-8-2020
 # ===================================================
 
 import re
@@ -50,11 +52,43 @@ def top_words(source, number):
         for line in f:
             words = rgx.findall(line)
             for w in words:
-                if ht.contains_key(w) == False:
-                    ht.put(w,words)
+                # Change all words into lower case since we are saying that "the" = "THE"
+                w = w.lower()
+
+                # If the key value already exists, then update the count
+                if ht.contains_key(w) == True:
+                    ht.put(w, ht.get(w) + 1)
+                
+                # Else, add into the bucket and update the set for keys
                 else:
-                    ht.size += 1
+                    ht.put(w, 1)
+                    keys.add(w)
+
+    # Set an empty array to added the top (user input number value) word frequency
+    sortedList = []
+
+    # Going to append (user input number value) into the array
+    for i in range(number):
+
+        # Set it equal to 0 as initializie 
+        topValue = 0
+
+        # Will look all over the key values in the keys set and compare to the current highest count
+        for key in keys:
+            if(ht.get(key) > topValue):
+                topKey = key
+                topValue = ht.get(key)
+
+        # Once we are done with comparing values, remove it from both bucket and key list that we don't need to compare again
+        ht.remove(topKey)
+        keys.remove(topKey)
+
+        # Add to the sorted list 
+        sortedList.append((topKey, topValue))
+    
+    # Return the full list once the loop is complete 
+    return (sortedList)
             
 
 
-print(top_words("alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE
+#print(top_words("D:\CS261\Assignment 5 Hash Map Implementation of a Concordance\Concordance\\alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE

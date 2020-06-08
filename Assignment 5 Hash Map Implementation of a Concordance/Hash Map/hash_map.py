@@ -1,6 +1,8 @@
 # hash_map.py
 # ===================================================
 # Implement a hash map with chaining
+# Name: Kenneth Kang
+# Date: 6-8-2020
 # ===================================================
 
 class SLNode:
