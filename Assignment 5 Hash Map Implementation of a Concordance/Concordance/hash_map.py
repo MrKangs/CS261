@@ -166,6 +166,18 @@ class HashMap:
         """
 
         hashKey = self._hash_function(key) % self.capacity
+        # case 1 - put('four', 4)
+        # ['four', 4] -> ['one', 1] -> ['two', 2] -> ['three', 3]
+
+        # put('one', 1)    hash_func('one') -> 5 % 6 = 5
+        # put('two', 2)    hash_func('two') -> 11 % 6 = 5
+        # put('apple', 100)  hash_func('apple') ->  17 % 6 = 5
+
+        # put('two', 150)   hash_func('two') -> 11 % 6 = 5
+
+        # case 2 - put('two', 'abcd')
+        # ['one': 1] -> ['two', 'abcd'] -> [ 'three', 3]
+
         target_node = self._buckets[hashKey].contains(key)
 
         if target_node is None:

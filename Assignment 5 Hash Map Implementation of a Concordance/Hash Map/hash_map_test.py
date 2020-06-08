@@ -1,6 +1,5 @@
 from hash_map import *
 
-
 """ EMPTY BUCKETS """
 print("\n\n********   EMPTY_BUCKETS()   ********")
 print("--- EXAMPLE 1 ---")
