@@ -50,7 +50,11 @@ def top_words(source, number):
         for line in f:
             words = rgx.findall(line)
             for w in words:
-                
+                if ht.contains_key(w) == False:
+                    ht.put(w,words)
+                else:
+                    ht.size += 1
+            
 
 
 print(top_words("alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE
