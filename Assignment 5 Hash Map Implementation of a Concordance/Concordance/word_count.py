@@ -91,4 +91,4 @@ def top_words(source, number):
             
 
 
-#print(top_words("D:\CS261\Assignment 5 Hash Map Implementation of a Concordance\Concordance\\alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE
+print(top_words("D:\CS261\Assignment 5 Hash Map Implementation of a Concordance\Concordance\\alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE
