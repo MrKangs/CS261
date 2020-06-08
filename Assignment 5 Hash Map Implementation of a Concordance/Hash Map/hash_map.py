@@ -140,16 +140,7 @@ class HashMap:
         Args:
             capacity: the new number of buckets.
         """
-
-        newBuckets = []
-        for i in range(capacity):
-            newBuckets.append(LinkedList())
-
-        for i in range(self.capacity):
-            if self._buckets[i].head is not None:
-                newBuckets[i] = self._buckets[i]
         
-        self._buckets = newBuckets
         self.capacity = capacity
 
 
@@ -184,14 +175,10 @@ class HashMap:
         Args:
             key: they key to search for and remove along with its value
         """
-        
-        hashKey = self._hash_function(key) % self.capacity
-
-        if self._buckets[hashKey].head is not None:
-            self._buckets[hashKey].head = None
-        else:
-            return None
-
+        for i in self._buckets:
+            if i.contains(key):
+                i.remove(key)
+                
     def contains_key(self, key):
         """
         Searches to see if a key exists within the hash table
@@ -200,13 +187,10 @@ class HashMap:
             True if the key is found False otherwise
 
         """
-        hashKey = self._hash_function(key) % self.capacity
-        target_node = self._buckets[hashKey].contains(key)
-        if target_node is not None:
-            return True
-        else:
-            return False
-
+        for i in self._buckets:
+            if i.contains(key):
+                return True
+        return False
 
     def empty_buckets(self):
         """

@@ -1,5 +1,11 @@
 from hash_map import *
 
+print(hash_function_1("eat"))
+print(hash_function_1("ate"))
+
+print(hash_function_2("eat"))
+print(hash_function_2("ate"))
+
 """ EMPTY BUCKETS """
 print("\n\n********   EMPTY_BUCKETS()   ********")
 print("--- EXAMPLE 1 ---")

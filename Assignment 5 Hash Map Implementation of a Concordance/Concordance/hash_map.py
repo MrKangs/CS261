@@ -140,16 +140,7 @@ class HashMap:
         Args:
             capacity: the new number of buckets.
         """
-
-        newBuckets = []
-        for i in range(capacity):
-            newBuckets.append(LinkedList())
-
-        for i in range(self.capacity):
-            if self._buckets[i].head is not None:
-                newBuckets[i] = self._buckets[i]
         
-        self._buckets = newBuckets
         self.capacity = capacity
 
 
@@ -166,18 +157,6 @@ class HashMap:
         """
 
         hashKey = self._hash_function(key) % self.capacity
-        # case 1 - put('four', 4)
-        # ['four', 4] -> ['one', 1] -> ['two', 2] -> ['three', 3]
-
-        # put('one', 1)    hash_func('one') -> 5 % 6 = 5
-        # put('two', 2)    hash_func('two') -> 11 % 6 = 5
-        # put('apple', 100)  hash_func('apple') ->  17 % 6 = 5
-
-        # put('two', 150)   hash_func('two') -> 11 % 6 = 5
-
-        # case 2 - put('two', 'abcd')
-        # ['one': 1] -> ['two', 'abcd'] -> [ 'three', 3]
-
         target_node = self._buckets[hashKey].contains(key)
 
         if target_node is None:
@@ -196,14 +175,10 @@ class HashMap:
         Args:
             key: they key to search for and remove along with its value
         """
-        
-        hashKey = self._hash_function(key) % self.capacity
-
-        if self._buckets[hashKey].head is not None:
-            self._buckets[hashKey].head = None
-        else:
-            return None
-
+        for i in self._buckets:
+            if i.contains(key):
+                i.remove(key)
+                
     def contains_key(self, key):
         """
         Searches to see if a key exists within the hash table
@@ -212,13 +187,10 @@ class HashMap:
             True if the key is found False otherwise
 
         """
-        hashKey = self._hash_function(key) % self.capacity
-        target_node = self._buckets[hashKey].contains(key)
-        if target_node is not None:
-            return True
-        else:
-            return False
-
+        for i in self._buckets:
+            if i.contains(key):
+                return True
+        return False
 
     def empty_buckets(self):
         """
